@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "../../components/header/header";
 import Input from "../../components/input/input";
+import { FiTrash } from "react-icons/fi";
 
 export default function Admin(){
     const [nameInput, setNameInput] = useState('')
@@ -44,16 +45,32 @@ export default function Admin(){
                     </div>
                 </section>
 
-                <div className="flex items-center justify-start flex-col mb-7 border-gray-100/25 border rounded-md">
-                <label className="text-white font-medium mt-2 mb-3">Veja como esta ficando..</label>
-                <article className="w-11/12 max-w-lg flex flex-col items-center justify-between bg-zinc-900 rounded px-1 py-3"
-                style={{marginBottom:8, marginTop:8, backgroundColor: backgroundColorInput}}
-                >
-                    <p className="font-medium" style={{color:textColorInput}}>Canal do Youtube</p>
-                </article>
-                </div>
+                {nameInput !== '' && (
+                    <div className="flex items-center justify-start flex-col mb-7 border-gray-100/25 border rounded-md">
+                    <label className="text-white font-medium mt-2 mb-3">Veja como esta ficando</label>
+                    <article className="w-11/12 max-w-lg flex flex-col items-center justify-between bg-zinc-900 rounded px-1 py-3"
+                    style={{marginBottom:8, marginTop:8, backgroundColor: backgroundColorInput}}
+                    >
+                        <p className="font-medium" style={{color:textColorInput}}>{nameInput}</p>
+                    </article>
+                    </div>
+                )}
+
+                <button type="submit" className="bg-blue-600 h-9 rounded-md text-white font-medium gap-4 flex justify-center items-center mb-7">Cadastrar</button>
 
             </form>
+
+            <h2 className="font-bold text-white mb-4 text-2xl ">Meus links</h2>
+            <article className="flex items-center justify-between w-11/12 max-w-xl rounded py-3 px-2 mb-2 select-none"
+            style={{backgroundColor:"#2563eb", color:"#000"}}
+            >
+                <p>Canal do youtube</p>
+                <div>
+                    <button className="border border-deshed p-1 rounded bg-neutral-900">
+                        <FiTrash color="#fff" size={18}/>
+                    </button>
+                </div>
+            </article>
         </div>
     )
 }
