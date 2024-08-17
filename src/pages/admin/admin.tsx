@@ -68,6 +68,12 @@ export default function Admin(){
             console.log("Erro ao cadastrar banco" + error)
         })
     }
+
+    async function handleDeleteLink(id: string){
+        const docRef = doc(db, "links", id)
+        await deleteDoc(docRef)
+    }
+
     return(
         <div className="flex items-center flex-col min-h-screen pb-7 px-2">
             <Header/>
@@ -121,16 +127,25 @@ export default function Admin(){
             </form>
 
             <h2 className="font-bold text-white mb-4 text-2xl ">Meus links</h2>
-            <article className="flex items-center justify-between w-11/12 max-w-xl rounded py-3 px-2 mb-2 select-none"
-            style={{backgroundColor:"#2563eb", color:"#000"}}
-            >
-                <p>Canal do youtube</p>
-                <div>
-                    <button className="border border-deshed p-1 rounded bg-neutral-900">
-                        <FiTrash color="#fff" size={18}/>
-                    </button>
-                </div>
-            </article>
+           
+
+                {links.map((link) => (
+                     <article 
+                     key={link.id}
+                     className="flex items-center justify-between w-11/12 max-w-xl rounded py-3 px-2 mb-2 select-none"
+                     style={{backgroundColor: link.bg , color:link.color}}
+                     >
+                         <p>{link.name}</p>
+                         <div>
+                             <button className="border border-deshed p-1 rounded bg-neutral-900"
+                             onClick={ () => handleDeleteLink(link.id)}
+                             >
+                                 <FiTrash color="#fff" size={18}/>
+                             </button>
+                         </div>
+                     </article>
+                ))}
+
         </div>
     )
 }
